@@ -1,5 +1,5 @@
 class BankAccount
-
+# runs in irb--------
 attr_accessor :balance, :interest_rate
 
   def initialize(balance, interest_rate)

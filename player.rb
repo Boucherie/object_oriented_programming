@@ -31,6 +31,10 @@ attr_accessor :lives, :gold_coins, :health_points
   end
 
   def restart
+    @lives = 5
+    @gold_coins = 0
+    @health_points = 10
+    "Restart! #{@lives} lives, #{@gold_coins} coins, #{@health_points} HP remaining"
   end
 
   chell = Player.new
@@ -43,4 +47,7 @@ attr_accessor :lives, :gold_coins, :health_points
   4.times do |fight|
     puts chell.do_battle
   end
+
+  puts chell.restart
+
 end

@@ -7,27 +7,36 @@ attr_accessor  :name, :experience
     @name = name
     @experience = 0
     @earnings = 0
+    @quota = 50
   end
 
   def quota
     amount = @experience / 2 + 50
+
   end
 
   def deliver(start_address, end_address)
-    route = end_address - start_address + 1
     daily_pay = 0
-    if route > quota
-      daily_pay += 0.25 * quota + 0.5 * (route - quota)
-    elsif route < @quota
-      @earnings = @quota * 0.25 - 2
-        "Quota not met- #{quota - route} remaining for this delivery."
+    route = end_address - start_address + 1
+    if start_address > end_address
+      route = start_address - end_address + 1
     end
-  # if start_address > end_address
-  #   route = start_address - end_address + 1
-  #   end
+
+    if route > quota
+      daily_pay += 0.25 * quota + 0.50 * (route - quota)
+    elsif route < quota
+      daily_pay = quota * 0.25 - 2.00
+      "Quota not met- #{quota - route} remaining for this delivery."
+    end
+
   @experience += route
   @earnings += daily_pay
-  "$#{daily_pay.to_f} made on this delivery."
+  "$#{daily_pay.to_f} made on this delivery, #{quota}."
+  
+  end
+
+  def report
+    "I'm #{@name}, I've delivered #{@experience} papers and I've earned $#{@earnings} so far!"
   end
 end
 
@@ -35,6 +44,12 @@ end
 
 tommy = Paperboy.new("Tommy")
 
-puts tommy.quota
+3.times do |num|
+  puts tommy.quota
+end
 
-puts tommy.deliver(250, 172)
+3.times do |deliveries|
+  puts tommy.deliver(101, 1)
+end
+
+puts tommy.report
